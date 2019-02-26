@@ -18,12 +18,13 @@ namespace MyTCPClient
             serverIP = IP;
             port = Port;
             name = Name;
+            Mtb.MaxLength = 256;
             Connect("test");
         }
 
         private void Sendb_Click(object sender, EventArgs e)
         {
-
+            Connect(Mtb.Text);
         }
 
         private void ChatForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -36,8 +37,8 @@ namespace MyTCPClient
             try
             {
                 //TcpClient client = new TcpClient(server, port);
-                TcpClient client = new TcpClient(new IPEndPoint(serverIP, port));
-
+                TcpClient client = new TcpClient();
+                client.Connect(serverIP, port);
                 // Translate the passed message into ASCII and store it as a Byte array.
                 byte[] data = Encoding.ASCII.GetBytes(message);
 
