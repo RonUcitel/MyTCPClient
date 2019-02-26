@@ -39,16 +39,18 @@
             // 
             // IPText
             // 
-            this.IPText.Location = new System.Drawing.Point(209, 6);
+            this.IPText.Location = new System.Drawing.Point(78, 3);
+            this.IPText.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.IPText.Name = "IPText";
-            this.IPText.Size = new System.Drawing.Size(323, 38);
+            this.IPText.Size = new System.Drawing.Size(124, 20);
             this.IPText.TabIndex = 0;
             // 
             // Startb
             // 
-            this.Startb.Location = new System.Drawing.Point(168, 235);
+            this.Startb.Location = new System.Drawing.Point(63, 99);
+            this.Startb.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.Startb.Name = "Startb";
-            this.Startb.Size = new System.Drawing.Size(444, 137);
+            this.Startb.Size = new System.Drawing.Size(166, 57);
             this.Startb.TabIndex = 1;
             this.Startb.Text = "Start";
             this.Startb.UseVisualStyleBackColor = true;
@@ -57,49 +59,55 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(4, 4);
+            this.label1.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(125, 32);
+            this.label1.Size = new System.Drawing.Size(49, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "Local IP:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 174);
+            this.label2.Location = new System.Drawing.Point(4, 73);
+            this.label2.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(160, 32);
+            this.label2.Size = new System.Drawing.Size(61, 13);
             this.label2.TabIndex = 4;
             this.label2.Text = "User name:";
             // 
             // PortText
             // 
-            this.PortText.Location = new System.Drawing.Point(209, 88);
+            this.PortText.Location = new System.Drawing.Point(78, 37);
+            this.PortText.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.PortText.Name = "PortText";
-            this.PortText.Size = new System.Drawing.Size(323, 38);
+            this.PortText.Size = new System.Drawing.Size(124, 20);
             this.PortText.TabIndex = 3;
+            this.PortText.Text = "13000";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 91);
+            this.label3.Location = new System.Drawing.Point(4, 38);
+            this.label3.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(191, 32);
+            this.label3.Size = new System.Drawing.Size(73, 13);
             this.label3.TabIndex = 6;
             this.label3.Text = "Server\'s Port: ";
             // 
             // NameText
             // 
-            this.NameText.Location = new System.Drawing.Point(209, 171);
+            this.NameText.Location = new System.Drawing.Point(78, 72);
+            this.NameText.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.NameText.Name = "NameText";
-            this.NameText.Size = new System.Drawing.Size(323, 38);
+            this.NameText.Size = new System.Drawing.Size(124, 20);
             this.NameText.TabIndex = 5;
             // 
             // StartUpForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(300, 189);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.NameText);
             this.Controls.Add(this.label2);
@@ -107,6 +115,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Startb);
             this.Controls.Add(this.IPText);
+            this.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.Name = "StartUpForm";
             this.Text = "Start!";
             this.ResumeLayout(false);
