@@ -129,7 +129,7 @@ namespace MyTCPClient
                     }
                     else if (responseData.First() == '-')
                     {
-                        friend = responseData.Split('-')[1];
+                        Dtb.Text += friend + ": " + responseData.Split('-')[1];
                     }
                     else if (responseData.First() == '?')
                     {
