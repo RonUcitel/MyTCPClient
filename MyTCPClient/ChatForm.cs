@@ -74,7 +74,7 @@ namespace MyTCPClient
             try
             {
                 // Translate the passed message into ASCII and store it as a Byte array.
-                byte[] data = Encoding.ASCII.GetBytes(message);
+                byte[] data = Encoding.ASCII.GetBytes("-" + message);
 
                 // Send the message to the connected TcpServer. 
                 stream.Write(data, 0, data.Length);
