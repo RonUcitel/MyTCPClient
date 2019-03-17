@@ -25,6 +25,7 @@ namespace MyTCPClient
             port = Port;
             name = Name;
             Mtb.MaxLength = 255;
+            Dtb.Enabled = false;
             t = new Thread(Recive);
             Connect();
         }
@@ -80,6 +81,7 @@ namespace MyTCPClient
 
                 // Send the message to the connected TcpServer. 
                 stream.Write(data, 0, data.Length);
+                Dtb.Text += dm.ToString();
             }
             catch (ArgumentNullException e)
             {
