@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
+using MyTCPServer;
 
 namespace MyTCPClient
 {
@@ -74,24 +75,11 @@ namespace MyTCPClient
             try
             {
                 // Translate the passed message into ASCII and store it as a Byte array.
-                byte[] data = Encoding.ASCII.GetBytes("-" + message);
+                DetailedMessage dm = new DetailedMessage(name, message);
+                byte[] data = Encoding.ASCII.GetBytes("-" + dm.ToString());
 
                 // Send the message to the connected TcpServer. 
                 stream.Write(data, 0, data.Length);
-
-
-                // Receive the TcpServer.response.
-
-                // Buffer to store the response bytes.
-                data = new byte[256];
-
-                // String to store the response ASCII representation.
-                string responseData = string.Empty;
-
-                // Read the first batch of the TcpServer response bytes.
-                int bytes = stream.Read(data, 0, data.Length);
-                responseData = Encoding.ASCII.GetString(data, 0, bytes);
-                Dtb.Text += ("\n{friend}: {0}", responseData);
             }
             catch (ArgumentNullException e)
             {
