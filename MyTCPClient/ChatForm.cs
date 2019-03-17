@@ -14,7 +14,7 @@ namespace MyTCPClient
         TcpClient client;
         IPAddress serverIP;
         int port;
-        string name, friend = "friend";
+        string name;
         NetworkStream stream;
         public ChatForm(IPAddress IP, int Port, string Name)
         {
@@ -123,13 +123,9 @@ namespace MyTCPClient
                     // Read the first batch of the TcpServer response bytes.
                     int bytes = stream.Read(data, 0, data.Length);
                     responseData = Encoding.ASCII.GetString(data, 0, bytes);
-                    if (responseData.First() == '~')
+                    if (responseData.First() == '-')
                     {
-                        friend = responseData.Split('~')[1];
-                    }
-                    else if (responseData.First() == '-')
-                    {
-                        Dtb.Text += friend + ": " + responseData.Split('-')[1];
+                        Dtb.Text += responseData.Split('-')[1];
                     }
                     else if (responseData.First() == '?')
                     {
