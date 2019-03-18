@@ -33,6 +33,8 @@ namespace MyTCPClient
         private void Sendb_Click(object sender, EventArgs e)
         {
             Send(Mtb.Text);
+            Mtb.Text = "";
+
         }
 
         private void ChatForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -62,11 +64,11 @@ namespace MyTCPClient
             }
             catch (ArgumentNullException e)
             {
-                Dtb.Text += ("\nArgumentNullException: {0}", e);
+                WriteToDtb("\nArgumentNullException: " + e);
             }
             catch (SocketException e)
             {
-                Dtb.Text += ("\nSocketException: {0}", e);
+                WriteToDtb("\nSocketException: " + e);
             }
             t.Start();
         }
@@ -81,21 +83,24 @@ namespace MyTCPClient
 
                 // Send the message to the connected TcpServer. 
                 stream.Write(data, 0, data.Length);
-                Dtb.Text += dm.ToString();
+                WriteToDtb(dm.ToString());
             }
             catch (ArgumentNullException e)
             {
-                Dtb.Text += ("\nArgumentNullException: {0}", e);
+                WriteToDtb("\nArgumentNullException: " + e);
                 return false;
             }
             catch (SocketException e)
             {
-                Dtb.Text += ("\nSocketException: {0}", e);
+                WriteToDtb("\nSocketException: " + e);
                 return false;
             }
             return true;
         }
-
+        private void WriteToDtb(string text)
+        {
+            Dtb.Text += text;
+        }
         public void Recive()
         {
             while (true)
@@ -115,7 +120,7 @@ namespace MyTCPClient
                     responseData = Encoding.ASCII.GetString(data, 0, bytes);
                     if (responseData.First() == '-')
                     {
-                        Dtb.Text += responseData.Split('-')[1];
+                        WriteToDtb(responseData.Split('-')[1]);
                     }
                     else if (responseData.First() == '?')
                     {
@@ -124,12 +129,21 @@ namespace MyTCPClient
                 }
                 catch (ArgumentNullException e)
                 {
-                    Dtb.Text += ("\nArgumentNullException: {0}", e);
+                    WriteToDtb("\nArgumentNullException: " + e);
                 }
                 catch (SocketException e)
                 {
-                    Dtb.Text += ("\nSocketException: {0}", e);
+                    WriteToDtb("\nSocketException: " + e);
                 }
+            }
+        }
+
+        private void Mtb_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Send(Mtb.Text);
+                Mtb.Text = "";
             }
         }
     }
