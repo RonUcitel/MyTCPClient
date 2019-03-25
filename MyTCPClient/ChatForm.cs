@@ -97,9 +97,17 @@ namespace MyTCPClient
             }
             return true;
         }
-        private void WriteToDtb(string text)
+        //private void WriteToDtb(string text)
+        //{
+        //    Dtb.Text += text;
+        //}
+        public void WriteToDtb(string value)
         {
-            Dtb.Text += text;
+            if (Dtb.InvokeRequired == true)
+                Dtb.Invoke((MethodInvoker)delegate { Dtb.Text += value; });
+
+            else
+                Dtb.Text += value;
         }
         public void Recive()
         {
