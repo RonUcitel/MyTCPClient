@@ -25,7 +25,8 @@ namespace MyTCPClient
             port = Port;
             name = Name;
             Mtb.MaxLength = 255;
-            Dtb.Enabled = false;
+            Dlb.Enabled = false;
+
             t = new Thread(Recive);
             Connect();
         }
@@ -64,11 +65,11 @@ namespace MyTCPClient
             }
             catch (ArgumentNullException e)
             {
-                WriteToDtb("\nArgumentNullException: " + e);
+                WriteToDlb("\nArgumentNullException: " + e);
             }
             catch (SocketException e)
             {
-                WriteToDtb("\nSocketException: " + e);
+                WriteToDlb("\nSocketException: " + e);
             }
             t.Start();
         }
@@ -83,31 +84,27 @@ namespace MyTCPClient
 
                 // Send the message to the connected TcpServer. 
                 stream.Write(data, 0, data.Length);
-                WriteToDtb(dm.ToString());
+                WriteToDlb(dm.ToString());
             }
             catch (ArgumentNullException e)
             {
-                WriteToDtb("\nArgumentNullException: " + e);
+                WriteToDlb("\nArgumentNullException: " + e);
                 return false;
             }
             catch (SocketException e)
             {
-                WriteToDtb("\nSocketException: " + e);
+                WriteToDlb("\nSocketException: " + e);
                 return false;
             }
             return true;
         }
-        //private void WriteToDtb(string text)
-        //{
-        //    Dtb.Text += text;
-        //}
-        public void WriteToDtb(string value)
+        public void WriteToDlb(string value)
         {
-            if (Dtb.InvokeRequired == true)
-                Dtb.Invoke((MethodInvoker)delegate { Dtb.Text += value; });
+            if (Dlb.InvokeRequired == true)
+                Dlb.Invoke((MethodInvoker)delegate { Dlb.Items.Add(value); });
 
             else
-                Dtb.Text += value;
+                Dlb.Items.Add(value);
         }
         public void Recive()
         {
@@ -128,7 +125,7 @@ namespace MyTCPClient
                     responseData = Encoding.ASCII.GetString(data, 0, bytes);
                     if (responseData.First() == '-')
                     {
-                        WriteToDtb(responseData.Split('-')[1]);
+                        WriteToDlb(responseData.Split('-')[1]);
                     }
                     else if (responseData.First() == '?')
                     {
@@ -137,11 +134,11 @@ namespace MyTCPClient
                 }
                 catch (ArgumentNullException e)
                 {
-                    WriteToDtb("\nArgumentNullException: " + e);
+                    WriteToDlb("\nArgumentNullException: " + e);
                 }
                 catch (SocketException e)
                 {
-                    WriteToDtb("\nSocketException: " + e);
+                    WriteToDlb("\nSocketException: " + e);
                 }
             }
         }

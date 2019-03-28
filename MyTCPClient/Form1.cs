@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
+using System.Net.Sockets;
 
 namespace MyTCPClient
 {
@@ -20,8 +21,8 @@ namespace MyTCPClient
 
         private void Startb_Click(object sender, EventArgs e)
         {
-            IPAddress ip = null;
-            int port = 0;
+            IPAddress ip;
+            int port;
             try
             {
                 ip = IPAddress.Parse(IPText.Text);
@@ -43,9 +44,46 @@ namespace MyTCPClient
                 MessageBox.Show(ex.ToString(), "Error");
                 return;
             }
-            ChatForm cf = new ChatForm(ip, port, NameText.Text);
-            cf.Show();
-            Hide();
+            Text = "Wait!";
+            SetEnable(false);
+            if (IsServerUp(ip, port))
+            {
+                ChatForm cf = new ChatForm(ip, port, NameText.Text);
+                cf.Show();
+                Hide();
+            }
+            else
+            {
+                SetEnable(true);
+                MessageBox.Show("The server on port " + ip.ToString() + "is not available", "Error", MessageBoxButtons.OK);
+                IPText.Focus();
+                IPText.SelectAll();
+            }
+        }
+
+        private void SetEnable(bool isEnable)
+        {
+            foreach (Control item in this.Controls)
+            {
+                item.Enabled = isEnable;
+            }
+        }
+        private bool IsServerUp(IPAddress host, int port)
+        {
+            using (TcpClient client = new TcpClient())
+            {
+                try
+                {
+                    client.Connect(host, port);
+                }
+                catch (SocketException)
+                {
+                    client.Close();
+                    return false;
+                }
+                client.Close();
+                return true;
+            }
         }
     }
 }
